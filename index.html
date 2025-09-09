@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Literary Publisher</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #333;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      width: 100%;
+      padding: 15px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #e91e63;
+    }
+
+    .btn-header {
+      padding: 10px 22px;
+      border-radius: 25px;
+      background: #e91e63;
+      color: #fff;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-header:hover {
+      background: #d81b60;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero-section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      margin-top: 70px; /* space for fixed header */
+    }
+
+    .hero-column {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+     
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-content {
+      color: #fff;
+      max-width: 700px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-quote {
+      background: #e91e63;
+      color: #fff;
+    }
+
+    .btn-quote:hover {
+      background: #d81b60;
+    }
+
+    .btn-call {
+      background: #fff;
+      color: #e91e63;
+    }
+
+    .btn-call:hover {
+      background: #f8f8f8;
+    }
+
+    /* ---------- LOGO STRIP ---------- */
+    .logo-strip {
+      background: #001d2e;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 250px;
+      flex-wrap: wrap;
+    }
+
+    .logo-strip img {
+      max-height: 28px;
+      object-fit: contain;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width: 768px) {
+      header {
+        padding: 15px 25px;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+
+      .hero-section {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .hero-overlay {
+        position: relative;
+        background: rgba(0,0,0,0.7);
+        padding: 40px 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    {% comment %} services section {% endcomment %}
+      .services-section {
+    background: #f9f9f7;
+    padding: 80px 60px;
+  }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .services-heading {
+    max-width: 50%;
+  }
+
+  .services-heading .sub-title {
+    color: #d81b60;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .services-heading h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #222;
+  }
+
+  .services-text {
+    max-width: 40%;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+
+  .service-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 15px 20px 10px;
+    color: #222;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 20px 20px;
+    line-height: 1.5;
+  }
+
+  /* Responsive */
+  @media(max-width: 992px) {
+    .services-heading, .services-text {
+      max-width: 100%;
+    }
+    .services-header {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  {% comment %} mentorship section {% endcomment %}
+   .mentorship {
+  padding: 80px 20px;
+  background: #fff;
+}
+
+.mentorship-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.mentorship-text .subtitle {
+  color: #e91e63;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mentorship-text h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.mentorship-text .description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-primary {
+  background: #e91e63;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #d81b60;
+}
+
+.btn-secondary {
+  background: #f50057;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #c51162;
+}
+
+/* Images Grid */
+.mentorship-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.mentorship-images img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.mentorship-images .tall {
+  grid-row: span 2;
+  height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mentorship-container {
+    grid-template-columns: 1fr;
+  }
+
+  .mentorship-images {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+{% comment %} why choose us section {% endcomment %}
+ .why-choose-us {
+  background: #f7f7f2;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.why-choose-us .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-choose-us h2 {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.why-choose-us .subtitle {
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.choose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.choose-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.choose-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.choose-card .icon {
+  font-size: 36px;
+  color: #e91e63;
+  margin-bottom: 15px;
+}
+
+.choose-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.choose-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-primary {
+  background: #e91e63;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #d81b60;
+}
+
+.btn-secondary {
+  background: #f50057;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #c51162;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .choose-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .choose-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+{% comment %} recent collection section {% endcomment %}
+ .recent-collection {
+  padding: 80px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.recent-collection .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recent-collection h2 {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.recent-collection .subtitle {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.view-all {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #e91e63;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.slider {
+  overflow: hidden;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+  min-width: 20%; /* 5 items per row */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.slide h3 {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #222;
+}
+
+.slide .author {
+  font-size: 14px;
+  color: #e91e63;
+  margin: 5px 0;
+}
+
+.stars {
+  font-size: 14px;
+  color: #fbc02d;
+}
+
+/* Dots */
+.dots {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dots span {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dots .active {
+  background-color: #e91e63;
+}
+
+{% comment %} blog section {% endcomment %}
+ .blog-section {
+  background: #fafaf3;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.blog-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-section h2 {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.blog-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.blog-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blog-content {
+  padding: 15px;
+}
+
+.blog-content .date {
+  display: block;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.blog-content h3 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.blog-content h3 a {
+  text-decoration: none;
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.blog-content h3 a:hover {
+  color: #e91e63;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #e91e63;
+}
+
+.learn-more {
+  display: inline-block;
+  margin-top: 30px;
+  color: #e91e63;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.learn-more:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+{% comment %} faq secttion {% endcomment %}
+.faq-section {
+  background: #fff;
+  padding: 80px 20px;
+}
+
+.faq-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.faq-left {
+  flex: 1 1 35%;
+}
+
+.faq-left h2 {
+  font-size: 24px;
+  color: #d5004c;
+  margin-bottom: 15px;
+}
+
+.faq-left .highlight {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.faq-left p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.faq-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.faq-buttons .btn {
+  display: inline-block;
+  background: #e91e63;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.faq-buttons .btn:hover {
+  background: #c2185b;
+}
+
+.faq-right {
+  flex: 1 1 60%;
+}
+
+.accordion {
+  border-top: 1px solid #eee;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #eee;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 18px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  color: #222;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.accordion-body {
+  display: none;
+  padding: 0 18px 18px;
+  color: #555;
+  font-size: 15px;
+}
+
+.accordion-item.active .accordion-body {
+  display: block;
+}
+
+.accordion-item .icon {
+  font-weight: bold;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .icon {
+  transform: rotate(180deg);
+}
+
+{% comment %} footer section {% endcomment %}
+ .footer {
+  background: #f5f5ef;
+  padding: 60px 20px 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.5fr;
+  gap: 40px;
+}
+
+.footer-logo {
+  max-width: 160px;
+  margin-bottom: 15px;
+}
+
+.footer-left p {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+.footer-middle, .footer-right {
+  font-size: 14px;
+}
+
+.footer-middle h4, .footer-right h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-middle ul, .footer-right ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-middle li, .footer-right li {
+  margin-bottom: 8px;
+}
+
+.footer-middle a, .footer-right a {
+  color: #444;
+  text-decoration: none;
+}
+
+.footer-middle a:hover, .footer-right a:hover {
+  text-decoration: underline;
+}
+
+.footer-form {
+  background: #082c3c;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.form-book {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+}
+
+.footer-form h3 {
+  margin-top: 60px;
+  margin-bottom: 5px;
+}
+
+.footer-form p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.footer-form .form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.footer-form input,
+.footer-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.footer-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+.footer-form button {
+  width: 100%;
+  padding: 12px;
+  background: #e91e63;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.footer-form button:hover {
+  background: #c2185b;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 20px;
+  color: #777;
+}
+
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-form {
+    margin-top: 30px;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+  <img src="logo.png" alt="Literary Publisher Logo">
+</div>
+
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </nav>
+    <button class="btn-header">Request Quote</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-column" style="background-image:url('bg.png');"></div>
+    
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <h1>Expert Book Marketing Services That Drive Sales and Grow Your Author Brand</h1>
+          <p>From editing to marketing, Book marketers helps authors turn manuscripts into bestselling books with end-to-end publishing solutions.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-quote">Request Quote</button>
+            <button class="btn btn-call">Live Call</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- LOGO STRIP -->
+  <div class="logo-strip">
+    <img src="https://via.placeholder.com/100x30?text=GoodFirms" alt="GoodFirms">
+    <img src="https://via.placeholder.com/100x30?text=Bark" alt="Bark">
+    <img src="https://via.placeholder.com/100x30?text=Clutch" alt="Clutch">
+    <img src="https://via.placeholder.com/100x30?text=Clutch" alt="Clutch">
+    <img src="https://via.placeholder.com/100x30?text=Amazon" alt="Amazon Associates">
+  </div>
+
+  <!-- SERVICES SECTION -->
+<section class="services-section">
+  <div class="services-header">
+    <div class="services-heading">
+      <p class="sub-title">— Book Services We Offer</p>
+      <h2>Struggling to Finish Your Book?<br>We’re Here to Help</h2>
+    </div>
+    <div class="services-text">
+      <p>
+        From publishing to marketing, we provide end-to-end solutions to help authors create, 
+        polish, and promote their books with confidence.
+      </p>
+    </div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Publishing" alt="Book Publishing">
+      <h3>Book Publishing</h3>
+      <p>A smooth, hassle free publishing process for both first-time writers and seasoned authors.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Review" alt="Book Review & Consultation">
+      <h3>Book Review & Consultation</h3>
+      <p>A smooth, hassle free publishing process for both first-time writers and seasoned authors.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Marketing" alt="Book Marketing">
+      <h3>Book Marketing</h3>
+      <p>Promote your book across major platforms with strategies that drive real sales and visibility.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Cover" alt="Book Cover Design">
+      <h3>Book Cover Design</h3>
+      <p>Eye-catching, professionally designed covers that make your book stand out on the shelf.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Author+Website" alt="Author Website">
+      <h3>Author Website</h3>
+      <p>Custom, SEO-optimized websites designed to showcase your work and attract readers and writer.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Formatting" alt="Book Formatting">
+      <h3>Book Formatting</h3>
+      <p>A smooth, hassle free publishing process for both first-time writers and seasoned authors.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Proofreading" alt="Book Proofreading">
+      <h3>Book Proofreading</h3>
+      <p>Meticulous proofreading to eliminate errors and ensure your book reads flawlessly writing.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://via.placeholder.com/400x250?text=Book+Editing" alt="Book Editing">
+      <h3>Book Editing</h3>
+      <p>Comprehensive editing to refine your manuscript, enhance flow, and strengthen your story.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mentorship Section -->
+<section class="mentorship">
+  <div class="mentorship-container">
+    
+    <!-- Left Content -->
+    <div class="mentorship-text">
+      <p class="subtitle">— Mentorship We Offer</p>
+      <h2>Ghostwriting & Author Mentorship</h2>
+      <p class="description">
+        Have an idea for a book but struggle to put it into words? Or maybe you’ve 
+        started writing but can’t seem to finish? Our ghostwriting and mentorship 
+        services are designed to help you every step of the way.
+      </p>
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Live Call</a>
+      </div>
+    </div>
+
+    <!-- Right Images -->
+    <div class="mentorship-images">
+      <img src="images/laptop-coffee.jpg" alt="Laptop with coffee">
+      <img src="images/woman-writing.jpg" alt="Woman writing" class="tall">
+      <img src="images/typing.jpg" alt="Typing on laptop">
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-us">
+  <div class="container">
+    <h2>Why Choose Us</h2>
+    <p class="subtitle">
+      As a writer, your book deserves more than just publishing — it deserves the right partner 
+      to bring it to life. Here’s why authors trust Book Marketeers:
+    </p>
+
+    <div class="choose-grid">
+      <!-- Card 1 -->
+      <div class="choose-card">
+        <div class="icon">📖</div>
+        <h3>We Understand Writers</h3>
+        <p>Whether you’re a first-time author or experienced, we guide you with patience and expertise.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="choose-card">
+        <div class="icon">💬</div>
+        <h3>Your Voice, Our Support</h3>
+        <p>Whether you’re a first-time author or experienced, we guide you with patience and expertise.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="choose-card">
+        <div class="icon">📝</div>
+        <h3>Creative Excellence</h3>
+        <p>Professional designers, editors, and marketers ensure your book looks great and reads even better.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="choose-card">
+        <div class="icon">😊</div>
+        <h3>Stress Free Journey</h3>
+        <p>Whether you’re a first-time author or experienced, we guide you with patience and expertise.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="choose-card">
+        <div class="icon">📈</div>
+        <h3>Marketing That Sells</h3>
+        <p>Whether you’re a first-time author or experienced, we guide you with patience and expertise.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="choose-card">
+        <div class="icon">✅</div>
+        <h3>Professional Quality</h3>
+        <p>Your book will meet the highest publishing standards in design, editing, and formatting.</p>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <a href="#" class="btn btn-primary">Request Quote</a>
+      <a href="#" class="btn btn-secondary">Live Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Collection Section -->
+<section class="recent-collection">
+  <div class="container">
+    <h2>Our Recent Collection</h2>
+    <p class="subtitle">1000+ books are published by different authors everyday.</p>
+    <a href="#" class="view-all">View All Products →</a>
+
+    <div class="slider">
+      <div class="slides">
+        <!-- Slide 1 -->
+        <div class="slide">
+          <img src="book.jpg" alt="Book Cover">
+          <h3>The Mind Connection</h3>
+          <p class="author">Joyce Meyer</p>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <img src="book.jpg" alt="Book Cover">
+          <h3>The Mind Connection</h3>
+          <p class="author">Joyce Meyer</p>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+          <img src="book.jpg" alt="Book Cover">
+          <h3>The Mind Connection</h3>
+          <p class="author">Joyce Meyer</p>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+          <img src="book.jpg" alt="Book Cover">
+          <h3>The Mind Connection</h3>
+          <p class="author">Joyce Meyer</p>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+          <img src="book.jpg" alt="Book Cover">
+          <h3>The Mind Connection</h3>
+          <p class="author">Joyce Meyer</p>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="dots"></div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section">
+  <div class="container">
+    <h2>Read Our Blogs</h2>
+    <div class="blog-grid">
+      <!-- Blog Card 1 -->
+      <div class="blog-card">
+        <img src="blog1.jpg" alt="Blog Post">
+        <div class="blog-content">
+          <span class="date">2 Aug, 2021</span>
+          <h3><a href="#">Reading Books Always Makes The Moments Happy</a></h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div class="blog-card">
+        <img src="blog2.jpg" alt="Blog Post">
+        <div class="blog-content">
+          <span class="date">2 Aug, 2021</span>
+          <h3><a href="#">Reading Books Always Makes The Moments Happy</a></h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div class="blog-card">
+        <img src="blog3.jpg" alt="Blog Post">
+        <div class="blog-content">
+          <span class="date">2 Aug, 2021</span>
+          <h3><a href="#">Reading Books Always Makes The Moments Happy</a></h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="learn-more">Learn More →</a>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-left">
+      <h2><span class="highlight">—</span> Frequently Asked Questions</h2>
+      <p>A list of frequently asked questions to help you understand how it works.</p>
+      <div class="faq-buttons">
+        <a href="#" class="btn">Request Quote</a>
+        <a href="#" class="btn">Live Call</a>
+      </div>
+    </div>
+
+    <div class="faq-right">
+      <div class="accordion">
+        <!-- Item 1 -->
+        <div class="accordion-item active">
+          <button class="accordion-header">
+            What is book marketing, and why do I need it?
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Book marketing helps your book reach the right audience, increase visibility, and drive sales. Without marketing, even the best-written book can get lost in the crowd.</p>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            Do you work with all genres of books?
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Yes, we work with all genres to ensure your book reaches the appropriate audience.</p>
+          </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            Can you help me build my author brand, not just promote my book?
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Absolutely! We provide brand-building strategies along with book promotion.</p>
+          </div>
+        </div>
+        <!-- Item 4 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            How soon should I start marketing my book?
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Ideally, book marketing should begin 3–6 months before your launch for maximum impact.</p>
+          </div>
+        </div>
+        <!-- Item 5 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            Do I need a big budget to market my book?
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>No, we can tailor marketing strategies to fit small, medium, or large budgets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Left Section -->
+    <div class="footer-left">
+      <img src="your-logo.png" alt="Literary Publisher Logo" class="footer-logo">
+      <p>As a writer, your book deserves more than just publishing — it deserves the right partner to bring it to life. Here’s why authors trust Book marketeers:</p>
+      <div class="social-icons">
+        <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+        <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+        <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+        <a href="#"><img src="youtube-icon.png" alt="YouTube"></a>
+      </div>
+      <p class="copyright">© 2023 store. All rights reserved.</p>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="footer-middle">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">What We Do</a></li>
+        <li><a href="#">To The Power of 10</a></li>
+        <li><a href="#">Donate</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+
+    <!-- Right Section -->
+    <div class="footer-right">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help centre</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="footer-form">
+      <div class="form-header">
+        <img src="open-book.png" alt="Open Book" class="form-book">
+        <h3>Let’s connect</h3>
+        <p>Fill out the form below to drop us an email for further inquiries</p>
+      </div>
+      <form>
+        <div class="form-row">
+          <input type="text" placeholder="Last Name">
+          <input type="text" placeholder="First Name">
+        </div>
+        <div class="form-row">
+          <input type="email" placeholder="Email">
+          <input type="text" placeholder="Phone Number">
+        </div>
+        <textarea placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2023 store. All rights reserved.
+  </div>
+</footer>
+
+
+
+
+<!-- JavaScript -->
+<script>
+const slides = document.querySelector('.slides');
+const slide = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.dots');
+
+let index = 0;
+const totalSlides = slide.length;
+const visibleSlides = 5; // show 5 per row
+
+// Create dots
+for (let i = 0; i < Math.ceil(totalSlides / visibleSlides); i++) {
+  const dot = document.createElement('span');
+  if (i === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+}
+
+const dots = document.querySelectorAll('.dots span');
+
+// Auto slide
+function showSlide() {
+  index++;
+  if (index >= Math.ceil(totalSlides / visibleSlides)) {
+    index = 0;
+  }
+  updateSlide();
+}
+
+function goToSlide(i) {
+  index = i;
+  updateSlide();
+}
+
+function updateSlide() {
+  slides.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+setInterval(showSlide, 3000); // auto slide every 3s
+</script>
+<script>
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const item = header.parentElement;
+    document.querySelectorAll('.accordion-item').forEach(i => {
+      if (i !== item) i.classList.remove('active');
+    });
+    item.classList.toggle('active');
+  });
+});
+</script>
+</body>
+</html>
